@@ -21,9 +21,7 @@ var Movies = Backbone.Collection.extend({
   comparator: 'title',
 
   sortByField: function(field) {
-    console.log(field, this.model.comparator)
-    this.model.comparator = field;
-    return this.sort(field);
+    return this.sort('comparator');
   }
 });
 
@@ -49,7 +47,7 @@ var AppView = Backbone.View.extend({
 
 var MovieView = Backbone.View.extend({
 
-  template: _.template(`div class="movie"> \
+  template: _.template(`<div class="movie"> \
                           <div class="like"> \
                             <button><img src="images/<%- like ? \'up\' : \'down\' %>.jpg"></button> \
                           </div> \
@@ -80,7 +78,9 @@ var MovieView = Backbone.View.extend({
 var MoviesView = Backbone.View.extend({
 
   initialize: function() {
-    // your ceode her
+    console.log(this)
+    this.on('sort', this.$el.sortByField);
+    this.on('change', this.render());
   },
 
   render: function() {
