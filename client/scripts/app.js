@@ -5,7 +5,7 @@ var Movie = Backbone.Model.extend({
   },
 
   toggleLike: function() {
-    // your code here
+    return this.attributes.like = this.attributes.like ? false : true;
   }
 
 });
@@ -21,7 +21,7 @@ var Movies = Backbone.Collection.extend({
   comparator: 'title',
 
   sortByField: function(field) {
-    // your code here
+    this.comparator = field;
   }
 
 });
@@ -48,14 +48,14 @@ var AppView = Backbone.View.extend({
 
 var MovieView = Backbone.View.extend({
 
-  template: _.template('<div class="movie"> \
+  template: _.template(`div class="movie"> \
                           <div class="like"> \
                             <button><img src="images/<%- like ? \'up\' : \'down\' %>.jpg"></button> \
                           </div> \
                           <span class="title"><%- title %></span> \
                           <span class="year">(<%- year %>)</span> \
                           <div class="rating">Fan rating: <%- rating %> of 10</div> \
-                        </div>'),
+                        </div>`),
 
   initialize: function() {
     // your code here
